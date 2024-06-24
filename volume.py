@@ -105,55 +105,6 @@ def random_polygon_in_2d_volume(num_sides: int, ctr_to_vtx_range: Union[int, Tup
     ImageDraw.Draw(mask).polygon(xy, outline=1, fill=1)
     return np.array(mask, dtype=np.uint8)
 
-
-# def random_polygon_in_3d_volume(num_sides: int, ctr_to_vtx_range: Union[int, Tuple[int, int]],
-#                                 volume_size: Tuple[int, int, int]):
-#     """
-#     Starter code from: https://au.mathworks.com/matlabcentral/answers/uploaded_files/201505/shape_recognition_demo1.m
-#     Create a random polygon around the origin with given number of sides and ctr_to_vtx_range and randomly
-#     rotates and places it in a 3D volume specified by volume_size.
-#     3D point placement logic used from https://www.cmu.edu/biolphys/deserno/pdf/sphere_equi.pdf
-#     :param num_sides: Number of sides for the polygon. Must be greater than 4
-#     :param ctr_to_vtx_range: In form of [min_distance, max_distance], specifies the distance range from a vertex to
-#     the centroid
-#     :param volume_size: Size of the output volume, in the form of [rows, columns, sheets]
-#     :return: A binary volume with the size of volume_size, with 1 indicating the polygon and 0 indicating the absence
-#     of the polygon
-#     """
-#     v = np.arange(num_sides)
-#     # Randomly generate distances for each vertex if a range is specified
-#     if isinstance(ctr_to_vtx_range, int):
-#         ctr_to_vtx_dists = np.ones(num_sides, dtype=np.int) * ctr_to_vtx_range
-#     else:
-#         ctr_to_vtx_dists = np.random.randint(*ctr_to_vtx_range, num_sides)
-#     z = (v / num_sides) * 2 * ctr_to_vtx_dists - ctr_to_vtx_dists
-#     phi = (v / num_sides) * 2 * np.pi
-#     xyz = np.zeros((num_sides, 3), dtype=np.float32)
-#     xyz[:, 0] = np.sqrt(np.power(ctr_to_vtx_dists, 2) - np.power(z, 2)) * np.cos(phi)
-#     xyz[:, 1] = np.sqrt(np.power(ctr_to_vtx_dists, 2) - np.power(z, 2)) * np.sin(phi)
-#     xyz[:, 2] = z
-#     # Randomly rotate the vertices around each axis in 3D
-#     # rand_rot = Rotation.from_euler('xyz', (rand() * 360, rand() * 360, rand() * 360), degrees=True)
-#     # xyz = np.floor(rand_rot.apply(xyz))
-#     # Translate the image so that the center is at (x_center, y_center, z_center) rather than at (0,0,0)
-#     max_distance = max(ctr_to_vtx_range) if not isinstance(ctr_to_vtx_range, int) else ctr_to_vtx_range
-#
-#     x_center = max_distance // 2 + randint(0, volume_size[0] - max_distance)
-#     y_center = max_distance // 2 + randint(0, volume_size[1] - max_distance)
-#     z_center = max_distance // 2 + randint(0, volume_size[2] - max_distance)
-#     # x_center = max_distance if max_distance == volume_size[0] - max_distance else\
-#     #     randint(*sorted((max_distance, volume_size[0] - max_distance)))
-#     # y_center = max_distance if max_distance == volume_size[1] - max_distance else\
-#     #     randint(*sorted((max_distance, volume_size[1] - max_distance)))
-#     # z_center = max_distance if max_distance == volume_size[2] - max_distance else\
-#     #     randint(*sorted((max_distance, volume_size[2] - max_distance)))
-#     xyz[:, 0] += x_center
-#     xyz[:, 1] += y_center
-#     xyz[:, 2] += z_center
-#     grid_x, grid_y, grid_z = np.meshgrid(range(volume_size[0]), range(volume_size[1]), range(volume_size[2]))
-#     mask = griddata(xyz, np.ones(len(xyz)), (grid_x, grid_y, grid_z), fill_value=0, method="linear")
-#     return np.round(mask).astype(np.uint8)
-
 def random_polygon_in_3d_volume(num_sides: int, ctr_to_vtx_range: Union[int, Tuple[int, int]],
                                 volume_size: Tuple[int, int, int]):
     """

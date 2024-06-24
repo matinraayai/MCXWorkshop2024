@@ -5,7 +5,6 @@ from .volume import random_volume, colin27_volume, usc195_volume, digimouse_volu
 
 
 def random_train_cfg(vol_size: Union[Tuple[int, int], Tuple[int, int, int]],
-                     nphoton: int,
                      num_props: int,
                      gpu_ids: str) -> Dict[str, Any]:
     """
@@ -22,7 +21,6 @@ def random_train_cfg(vol_size: Union[Tuple[int, int], Tuple[int, int, int]],
     max_prop = vol.max(initial=None)
     # Add a third axis to the volume. MCX doesn't accept 2D volumes directly.
     cfg = {
-        "nphoton": nphoton,
         "vol": vol,
         "issrcfrom0": 1,  # Disables legacy volume indexing
         "srctype": 'isotropic',
