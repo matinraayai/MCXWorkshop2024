@@ -179,10 +179,8 @@ def random_volume(volume_size: Union[Tuple[int, int], Tuple[int, int, int]], num
         for i in range(num_shapes):
             # Randomly choose between placing a character or a polygon in the volume
             if rand() > 0.5:
-                print("Charecter")
                 curr_prop = random_char_generator(volume_size)
             else:
-                print("polygon")
                 num_sides = randint(min_polygon_sides, 8)
                 curr_prop = random_polygon_generator(num_sides, ctr_vtx_range, volume_size)
             curr_prop = last_prop_idx * curr_prop

@@ -44,12 +44,11 @@ class ResidualBlock(nn.Module):
         return out
 
 
-class DnCNNLite(nn.Module):
+class DnCNN(nn.Module):
     def __init__(self, do_3d=False, kernel_size=3, padding=1, padding_mode='reflect', input_channels=1,
                  output_channels=1,
-                 inter_kernel_channel=64, num_layers=17, activation_fn=F.relu,
-                 init_policy=None):
-        super(DnCNNLite, self).__init__()
+                 inter_kernel_channel=64, num_layers=17, activation_fn=F.relu):
+        super(DnCNN, self).__init__()
         self.num_layers = num_layers
         self.activation_fn = activation_fn
         conv_layer = nn.Conv3d if do_3d else nn.Conv2d
